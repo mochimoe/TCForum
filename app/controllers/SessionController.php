@@ -42,7 +42,7 @@ class SessionController extends ControllerBase
             $password = $this->request->getPost('password');
 
             $db = $this->getDI()->get('db'); 
-            $sql = "SELECT * FROM dbo.Users  WHERE email = '".$email."'" . " AND " . "password = '".$password."'";
+            $sql = "SELECT * FROM dbo.Users  WHERE email = '".$email."'" . " AND " . "password = '".sha1($password)."'";
 
             $result = $db->query($sql);
             

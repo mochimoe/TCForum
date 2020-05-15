@@ -14,6 +14,9 @@
 <body class="bg-dark">
     <div class="d-flex justify-content-center h-100">
       <div class="my-auto" style="width: 25%;">
+        <div class="container">
+          {{ flash.output() }}
+        </div>
         <div class="card shadow " >
           <div class="card-body">
               <h3 class="card-title font-weight-bolder p-3 text-center">DAFTAR AKUN</h3>
@@ -27,8 +30,16 @@
                     <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                   </div>
                   <div class="form-group">
+                    <label for="exampleInputEmail1">Angkatan</label>
+                    <input type="text" name="angkatan" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Konfirmasi Password</label>
+                    <input type="password" name="kpassword" class="form-control" id="exampleInputPassword1">
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-sm btn-primary">Submit</button>

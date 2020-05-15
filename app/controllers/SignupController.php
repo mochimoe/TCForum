@@ -25,28 +25,68 @@ class SignupController extends ControllerBase
     }
     public function registAction()
     {
-        $nama = $_POST['nama'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        
+        
+        if ($this->request->isPost()) {
+            $nama = $this->request->getPost("nama");
+            $email = $this->request->getPost("email");
+            $password = $this->request->getPost("password");
+            $angkatan = $this->request->getPost("angkatan");
+            $kpassword = $this->request->getPost("kpassword");
 
-        $sql = "insert into dbo.Users values ('".$nama."', '".$email."' , '".$password."')";
-        $db = $this->getDI()->get('db');
+            if ($nama === "") {
+                $this->flash->error("Nama anda kosong");
+                //pick up the same view to display the flash session errors
+                return $this->view->pick("signup/index");
+            }
 
-        $result = $db->execute($sql);
+            if ($email === "") {
+                $this->flash->error("Email anda kosong");
+                //pick up the same view to display the flash session errors
+                return $this->view->pick("signup/index");
+            }
 
-        //echo ($sql);
-        $this->flash->success(
-            'Akun berhasil dibuat, silahkan login'
-        );
+            if ($angkatan === "") {
+                $this->flash->error("Angkatan anda kosong");
+                //pick up the same view to display the flash session errors
+                return $this->view->pick("signup/index");
+            }
 
-        return $this->dispatcher->forward(
-            [
-                'controller' => 'session',
-                'action'     => 'index',
-            ]
-        );
-       
+            if ($password === "") {
+                $this->flash->error("Password anda kosong");
+                //pick up the same view to display the flash session errors
+                return $this->view->pick("signup/index");
+            }
 
+            if ($kpassword === "") {
+                $this->flash->error("Konfirmasi Password anda kosong");
+                //pick up the same view to display the flash session errors
+                return $this->view->pick("signup/index");
+            }
+
+            if ($password !== $kpassword) {
+                $this->flas->error("Password dan Konfirmasi Password anda tidak cocok");
+                //pick up the same view to display the flash session errors
+                return $this->view->pick("signup/index");
+            }
+
+            $sql = "insert into dbo.Users values ('".$nama."', '".$email."' , '".sha1($password)."', '".$angkatan."')";
+            $db = $this->getDI()->get('db');
+
+            $result = $db->execute($sql);
+
+            //echo ($sql);
+            $this->flash->success(
+                'Akun berhasil dibuat, silahkan login'
+            );
+
+            return $this->dispatcher->forward(
+                [
+                    'controller' => 'session',
+                    'action'     => 'index',
+                ]
+            );
+        }
     }
 
 }
