@@ -4,6 +4,7 @@ use Phalcon\Mvc\Controller;
 use Phalcon\Tag;
 use Phalcon\Assets\Asset\Css;
 use Phalcon\Assets\Asset\Js;
+use MyApp\Models\Users;
 
 class SignupController extends ControllerBase
 {
@@ -70,22 +71,34 @@ class SignupController extends ControllerBase
                 return $this->view->pick("signup/index");
             }
 
-            $sql = "insert into dbo.Users values ('".$nama."', '".$email."' , '".sha1($password)."', '".$angkatan."')";
-            $db = $this->getDI()->get('db');
-
-            $result = $db->execute($sql);
-
-            //echo ($sql);
-            $this->flash->success(
-                'Akun berhasil dibuat, silahkan login'
-            );
-
-            return $this->dispatcher->forward(
+            $user = new Users();
+            $user->assign(
                 [
-                    'controller' => 'session',
-                    'action'     => 'index',
+                    "nama" => $nama,
+                    "angkatan" => $angkatan,
+                    "password" => sha1($password),
+                    "email" =>$email,
                 ]
             );
+            // Store and check for errors
+            $success = $user->save();
+
+            if ($success) {
+                $this->flash->success(
+                    'Akun berhasil dibuat, silahkan login'
+                );
+    
+                return $this->dispatcher->forward(
+                    [
+                        'controller' => 'session',
+                        'action'     => 'index',
+                    ]
+                );
+            } else {
+                $this->flash->error("Gagal mendaftar");
+                return $this->response->redirect('signup');
+            }
+            
         }
     }
 
