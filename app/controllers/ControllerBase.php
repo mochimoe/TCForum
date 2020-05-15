@@ -9,5 +9,11 @@ use Phalcon\Assets\Asset\Js;
 
 class ControllerBase extends Controller
 {
-    // Implement common logic
+    protected function initialize()
+    {
+        $css1 = new Css('css/style.css');
+        $this->assets->addAsset($css1);
+        // Prepend the application name to the title
+        $this->tag->prependTitle('TCForum | ');
+    }
 }
