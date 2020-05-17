@@ -28,12 +28,7 @@ class HomeController extends ControllerBase
     public function logoutAction(){
         $this->session->destroy();
 
-        return $this->dispatcher->forward(
-            [
-                'controller' => 'index',
-                'action'     => 'index',
-            ]
-            );
+        return $this->response->redirect('/');
     }
 
 }

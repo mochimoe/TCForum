@@ -88,12 +88,7 @@ class SignupController extends ControllerBase
                     'Akun berhasil dibuat, silahkan login'
                 );
     
-                return $this->dispatcher->forward(
-                    [
-                        'controller' => 'session',
-                        'action'     => 'index',
-                    ]
-                );
+                return $this->response->redirect('session/');
             } else {
                 $this->flash->error("Gagal mendaftar");
                 return $this->response->redirect('signup');

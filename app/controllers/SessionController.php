@@ -28,7 +28,9 @@ class SessionController extends ControllerBase
             'auth',
             [
                 'id'    => $user['id'],
+                'nama'  => $user['nama'],
                 'email' => $user['email'],
+                'angkatan' => $user['angkatan'],
             ]
         );
     }
@@ -56,12 +58,7 @@ class SessionController extends ControllerBase
                     'Welcome ' . $user['nama']
                 );
 
-                return $this->dispatcher->forward(
-                    [
-                        'controller' => 'home',
-                        'action'     => 'index',
-                    ]
-                );
+                return $this->response->redirect('/');
             }
 
             $this->flash->error(
