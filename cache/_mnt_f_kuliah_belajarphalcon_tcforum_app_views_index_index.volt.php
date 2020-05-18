@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Freelancer - Start Bootstrap Theme</title>
+        <title><?= $this->tag->getTitle() ?></title>
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -19,7 +19,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top"><>ForumTC</a>
+                <a class="navbar-brand js-scroll-trigger" href="/"><>ForumTC</a>
                 <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
@@ -30,17 +30,17 @@
             </div>
         </nav>
         <!-- Masthead-->
-        <header class="masthead bg-dark text-white text-center">
-            <div class="container d-flex align-items-center flex-column">
-                <!-- Masthead Avatar Image--><img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="" /><!-- Masthead Heading-->
-                <h1 class="masthead-heading text-uppercase mb-0">FORUM AREK TC</h1>
-                <!-- Icon Divider-->
-                <div class="divider-custom divider-light">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
+        <header class="masthead bg-dark text-white">
+            <div class="container d-flex justify-content-between">
+                    <div class="align-self-center">
+                        <h1 class=" mb-0">Luapkan keluh kesahmu disini</h1>
+                        <p class="lead" style="font-size: 16px;">Forum keluh kesah dan tanya jawab anak informatika ITS</p>
+                        <a href="/signup" class="btn btn-lg btn-outline-primary"> Daftar Sekarang</a>
+                    </div>
+                    <div class="just">
+                        <img src="https://i.ibb.co/CJrX4m2/iPad-1.png" style="height: 447px; width: 697px; object-fit: contain;" alt="" srcset="">
+                    </div>
                 </div>
-                <!-- Masthead Subheading-->
             </div>
         </header>
         

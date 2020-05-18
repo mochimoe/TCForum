@@ -11,6 +11,7 @@ class IndexController extends ControllerBase
     {
         $css1 = new Css('css/styles.css');
         $this->assets->addAsset($css1);
+        $this->tag->setTitle('Beranda');
 
     }
 
@@ -20,8 +21,8 @@ class IndexController extends ControllerBase
             // Retrieve its value
             return $this->dispatcher->forward(
                 [
-                    'controller' => 'home',
-                    'action'     => 'index',
+                    'controller' => 'posts',
+                    'action'     => 'show',
                 ]
             );
         }

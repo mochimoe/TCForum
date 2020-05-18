@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>{{ get_title() }}</title>
+        <title><?= $this->tag->getTitle() ?></title>
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        {{ assets.outputCss() }}
+        <?= $this->assets->outputCss() ?>
        
     </head>
     <body class="bg-dark">
@@ -23,8 +23,8 @@
                 <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/posts/show">forum</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/profile">profil</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/posts/show">Posts</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About</a></li>
                         <li class="nav-item mx-0 mx-lg-1"></i><a class="bg-danger nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/home/logout"><i class="fas fa-user mr-2"></i>Logout</a></li>
                     </ul>
                 </div>
@@ -33,9 +33,41 @@
 
         <section class="mb-3 mt-lg-5 bg-dark" style="padding-top: 100px;">
             <div class="container">
-                {{ flash.output() }}
+                <?= $this->flash->output() ?>
             </div>
-            {% block content %}{% endblock %}
+            
+<div class="p-3 d-flex justify-content-center">
+    <div class="card bg-dark shadow mb-3 text-white" style="width:35%;">
+        <div class="card-header">Edit Post</div>
+        <div class="card-body">
+            <form action="/posts/update/<?= $posts->id ?>" method="post">
+                <div class="form-group">
+                    <label for="judul" class="">Judul Buku</label>
+                    <input type="text" name="judul"class="form-control bg-dark text-white" value="<?= $posts->judul ?>">
+                </div>
+                <div class="form-group">
+                    <label for="judul" class=" ">Isi Post</label>
+                    <textarea class="form-control bg-dark text-white" name="isi" value=""><?= $posts->isi ?></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="kategori">Kategori:</label>
+                    <select name="kategori">
+                        <?php if (($posts->kategori) === ('Kuliah')) { ?>
+                        <option value="Kuliah" selected>Kuliah</option>
+                        <option value="Serba-Serbi">Serba-Serbi</option>
+                        <?php } else { ?>
+                        <option value="Kuliah">Kuliah</option>
+                        <option value="Serba-Serbi" selected>Serba-Serbi</option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary">Edit</button>
+            </form>
+        </div>
+    </div>
+    
+</div>
+
         </section>
 
        <!-- Footer-->

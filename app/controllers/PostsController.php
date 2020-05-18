@@ -16,10 +16,17 @@ use MyApp\Models\Komens;
 
 class PostsController extends ControllerBase
 {
+    public function initialize()
+    {
+        $css1 = new Css('css/styles.css');
+        $this->assets->addAsset($css1);
+        parent::initialize();
+
+        return $this->view;
+
+    }
     public function indexAction()
     {
-        $css1 = new Css('css/style.css');
-        $this->assets->addAsset($css1);
 
     }
 
@@ -66,9 +73,6 @@ class PostsController extends ControllerBase
 
     public function showAction() //untuk menampilkan list postingan yg dibuta user
     {
-        $css1 = new Css('css/style.css');
-        $this->assets->addAsset($css1);
-
         $this->tag->setTitle('Dashboard');
 
         $auth = $this->session->get('auth');

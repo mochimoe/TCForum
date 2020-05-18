@@ -8,6 +8,12 @@ use MyApp\Models\Komens;
 
 class KomenController extends ControllerBase
 {
+    public function initialize()
+    {
+        $css1 = new Css('css/styles.css');
+        $this->assets->addAsset($css1);
+
+    }
 
     public function createAction($postid) //untu membuat komentar baru dan menyimpannya ke database
     {
@@ -46,6 +52,51 @@ class KomenController extends ControllerBase
         
 
     }
+    public function editkomenAction($id)
+    {
+        $this->tag->setTitle('Edit Komen');
+        $css1 = new Css('css/style.css');
+        $this->assets->addAsset($css1);
+        //fungsi editnya
+        $auth = $this->session->get('auth');
+        $userid = $auth['id'];
+        
+        $find_komen = Komens::findFirst($id);
+        
+        if($find_komen === null){
+            $this->flash->error("Not Authorized");
+            return $this->response->redirect('/posts/show');
+        }
+        // $this->view->disable();
+
+        $this->view->komen = $find_komen;
+
+    }
+    public function updateAction($id)
+    {
+        $isi_komen = $this->request->get('isi');
+
+        $komen = Komens::findFirst($id);
+
+        $komen->isi_komen = $isi_komen;
+
+        if($this->request->isPost())
+        {
+            $komen->save();
+        }
+
+        $this->flash->success(
+            'Komentar berhasil diubah'
+        );
+        return $this->dispatcher->forward(
+            [
+                'controller' => 'posts',
+                'action'     => 'detail',
+                'params'     => [$komen->id_post],
+            ]
+        );
+
+    }
 
     public function deleteAction($id) //untuk menghapus komentar
     {
@@ -65,6 +116,8 @@ class KomenController extends ControllerBase
             echo "kapok ga iso";
         }
     }
+
+   
 
 }
 
